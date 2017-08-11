@@ -1,4 +1,4 @@
-package observer;
+package observer.impl;
 
 // 显示器的接口
 public interface Displayable {

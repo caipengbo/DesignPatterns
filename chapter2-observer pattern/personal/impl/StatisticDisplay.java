@@ -1,7 +1,7 @@
-package observer;
+package observer.impl;
 
-// 天气预报显示器
-public class ForecastDisplay implements Displayable, Observer{
+// 天气数据显示器
+public class StatisticDisplay implements Displayable, Observer {
 
 	private float temperature = 0;
 	private float humidity = 0;
@@ -14,7 +14,8 @@ public class ForecastDisplay implements Displayable, Observer{
 
 	@Override
 	public void display() {
-		System.out.println("Forecast:" + temperature + " " + humidity);
+
+		System.out.println("Show statistic:" + temperature + " " + humidity);
 	}
 
 }

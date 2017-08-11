@@ -1,5 +1,8 @@
-package observer;
+package observer.impl;
 
+/**
+ *  自己实现 观察者模式
+ */
 public class Main {
 	
 	public static void main(String[] args) {

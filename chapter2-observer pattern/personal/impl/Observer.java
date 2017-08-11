@@ -1,4 +1,4 @@
-package observer;
+package observer.impl;
 
 // 观察者 接口
 public interface Observer {

@@ -1,4 +1,4 @@
-package observer;
+package observer.impl;
 
 // 当前天气 显示器
 public class CurrentWeatherDisplay implements Displayable, Observer {

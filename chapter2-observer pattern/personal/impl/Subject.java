@@ -1,4 +1,4 @@
-package observer;
+package observer.impl;
 
 // 主题，  被观察者 接口
 public interface Subject {
