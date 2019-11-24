@@ -1,21 +1,16 @@
-# Head first Design Patterns
+# Learn Design Patterns
 
-目录结构： chapter >> personal code | official code | exercise >> version 1.0
+## 内容 
+- 设计模式的原则
+- 23种设计模式分类
+- 各个设计模式
+    - 解决的问题
+    - 使用场景（例子）
+    - 优缺点
+- Java面向对象的特性
 
-以下将每章节包括 设计原则 和 设计模式
+##目录结构： 
 
-----------
-# 第一章 入门 #
-
-## 设计原则 ##
-
-## 设计模式 —— 策略模式 ##
-
-
-----------
-
-# 第二章 观察者模式 #
-
-## 设计原则 ##
-
-## 设计模式 —— 观察者模式 ##
+## 学习方法：
+在网络学习设计模式
+学习完之后自己编写 Head First Design Patterns 中的例子，作为练习
