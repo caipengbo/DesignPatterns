@@ -3,7 +3,7 @@ package creational.singleton;
 import headfirst.singleton.subclass.Singleton;
 
 /**
- * Title: 单例模式
+ * Title: 单例模式（5种）
  * Desc: 保证一个类仅有一个实例，并提供一个访问它的全局访问点（访问方法）。
  *
  * Created by Myth-Lab on 11/24/2019
