@@ -28,9 +28,10 @@ class Matrix {
 
 //抽象图像类：抽象类
 abstract class Image {
-    protected ImageImp imp;
+    protected PlatformInterface imp;  // 桥接
+    // protected OtherDimImpl   // 两个以上的维度，再加一个桥接
 
-    public void setImageImp(ImageImp imp) {
+    public void setImageImp(PlatformInterface imp) {
         this.imp = imp;
     }
 
@@ -78,11 +79,11 @@ class GIFImage extends Image {
 }
 // 第二个维度
 //抽象操作系统实现类：实现类接口
-interface ImageImp {
+interface PlatformInterface {
     public void doPaint(Matrix m);  //显示像素矩阵m
 }
 //Windows操作系统实现类：具体实现类
-class WindowsImp implements ImageImp {
+class WindowsImp implements PlatformInterface {
     public void doPaint(Matrix m) {
         //调用 Windows系统的绘制函数绘制像素矩阵
         System.out.print("Use Windows system call paint image!");
@@ -90,7 +91,7 @@ class WindowsImp implements ImageImp {
 }
 
 //Linux操作系统实现类：具体实现类
-class LinuxImp implements ImageImp {
+class LinuxImp implements PlatformInterface {
     public void doPaint(Matrix m) {
         //调用Linux系统的绘制函数绘制像素矩阵
         System.out.print("Use Linux system call paint image!");
@@ -98,7 +99,7 @@ class LinuxImp implements ImageImp {
 }
 
 //Unix操作系统实现类：具体实现类
-class UnixImp implements ImageImp {
+class UnixImp implements PlatformInterface {
     public void doPaint(Matrix m) {
         //调用Unix系统的绘制函数绘制像素矩阵
         System.out.print("Use Unix system call paint image!");
@@ -143,9 +144,9 @@ class XMLUtil {
 public class BridgeDemo {
     public static void main(String[] args) {
         Image image;
-        ImageImp imp;
+        PlatformInterface imp;
         image = (Image)XMLUtil.getBean("image");
-        imp = (ImageImp)XMLUtil.getBean("os");
+        imp = (PlatformInterface)XMLUtil.getBean("os");
         assert image != null;
         image.setImageImp(imp);
         image.parseFile("test");
