@@ -29,7 +29,7 @@ package creational.singleton;
 // 衡量标准： 懒加载、线程安全、效率高
 
 // 经验之谈：一般情况下，不建议使用第 1 种懒汉方式，建议使用第 2种饿汉方式。
-// 只有在要明确实现 lazy loading 效果时，才会使用第 4 种登记方式。
+// 只有在要明确实现 lazy loading 效果时，才会使用第 4 种（静态内部类）登记方式（这种方法比较好，但是有的语言不支持）。
 // 如果涉及到反序列化创建对象时，可以尝试使用第 5 种枚举方式。
 // 如果有其他特殊的需求，可以考虑使用第 4 种双检锁方式。
 
@@ -38,8 +38,14 @@ class Singleton1 {
     private static Singleton1 instance;
     // 构造方法 私有化（放置其他类实例化它）
     private Singleton1(){}
-    // synchronied 保证现在安全（但是效率会变低）
+    // synchronied 保证现在安全，但是每次调用getInstance()时都需要进行线程锁定判断，在多线程高并发访问环境中，将会导致系统性能大大降低
     public static synchronized Singleton1 getInstance() {
+        if (instance == null) instance = new Singleton1();
+        return instance;
+    }
+    // 线程不安全，如果一个线程调用getInstance（初始化又比较耗时间）；
+    // 另一个线程又调用getInstance（其他的线程还没有new完对象）, 此时instance还是null,这样又会new一个新的对象
+    public static Singleton1 getInstance2() {
         if (instance == null) instance = new Singleton1();
         return instance;
     }
@@ -56,13 +62,16 @@ class Singleton2 {
 }
 // 3. 双重校验锁DCL（ >JDK1.5）避免了synchronied的低效率，同时也能懒加载，线程安全
 class Singleton3 {
+    // (注意点1)被volatile修饰的成员变量可以确保多个线程都能够正确处理
     private volatile static Singleton3 instance;
     // 构造方法 私有化（放置其他类实例化它）
     private Singleton3(){}
     // synchronied 保证现在安全（但是效率会变低）
     public static Singleton3 getInstance() {
-        if (instance == null) {  // 仅当实例未初始化前进行同步
-            synchronized (Singleton3.class) {
+        if (instance == null) {  // 仅当实例未初始化前进行同步  注意点2
+            synchronized (Singleton3.class) {  // 注意点3
+                // 注意点4
+                // 如果仅有一次判断的话，其他排队等待的进程无法知道前面的进程已经创建了对象
                 if (instance == null) {
                     instance = new Singleton3();
                 }

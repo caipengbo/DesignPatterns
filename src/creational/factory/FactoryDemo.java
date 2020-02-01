@@ -11,7 +11,8 @@ package creational.factory;
  * Created by Myth-Lab on 11/24/2019
  */
 
-// 核心类仅仅负责给出具体工厂必须实现的接口，而不负责产品类被实例化这种细节，这使得工厂方法模式可以允许系统在不修改工厂角色的情况下引进新产品
+// 核心类仅仅负责给出具体工厂必须实现的接口，而不负责产品类被实例化这种细节，
+// 这使得工厂方法模式可以允许系统在不修改工厂角色的情况下引进新产品
 interface ShapeFactory {
     Shape produceShape();
 }
