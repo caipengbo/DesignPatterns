@@ -1,7 +1,7 @@
 package structural.adapter;
 
 /**
- * Title:  笔记本通过读卡去读取TF卡（特别好的例子）
+ * Title:  笔记本通过读卡器读取TF卡（特别好的例子）
  * Desc: 笔记本电脑内置是可以读取SD卡的
  * Created by Myth-Lab on 11/28/2019
  */
@@ -47,6 +47,7 @@ class TFAdpter implements SDCard {
     TFAdpter(TFCard tfCard) {
         this.tfCard = tfCard;
     }
+    // 包装了一下
     @Override
     public void read() {
         tfCard.read();

@@ -55,7 +55,7 @@ public class CommandDemo {
     public static void main(String[] args) {
         Invoker invoker = new Invoker();
         Receiver receiver = new Receiver();
-        Command command = new ConcreteCommand(receiver);
+        Command command = new ConcreteCommand(receiver);  // 具体的命令和Receiver绑定
         invoker.setCommand(command);
         invoker.call();
     }    
