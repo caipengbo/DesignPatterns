@@ -1,5 +1,8 @@
 package creational.singleton;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * Title: 单例模式（5种）
  * Desc: 保证一个类仅有一个实例，并提供一个访问它的全局访问点（访问方法）。
@@ -62,7 +65,7 @@ class Singleton2 {
 }
 // 3. 双重校验锁DCL（ >JDK1.5）避免了synchronied的低效率，同时也能懒加载，线程安全
 class Singleton3 {
-    // (注意点1)被volatile修饰的成员变量可以确保多个线程都能够正确处理
+    // (注意点1)被volatile修饰：防止new 指令重排序（先复制给instance，再执行构造函数）
     private volatile static Singleton3 instance;
     // 构造方法 私有化（放置其他类实例化它）
     private Singleton3(){}
@@ -79,6 +82,22 @@ class Singleton3 {
         }
         return instance;
     }
+    // 使用ReentrantLock
+    private static final Lock lock = new ReentrantLock();
+    public static Singleton3 getInstance2() {
+        if (instance == null) {
+            try {
+                lock.lock();
+                if (instance == null) {
+                    instance = new Singleton3();
+                }
+            } finally {
+                lock.unlock();
+            }
+        }
+        return instance;
+    }
+
 }
 // 4. 静态内部类(懒加载，延迟初始化，又可以保证线程安全)
 class Singleton4 {
